@@ -8,7 +8,6 @@ N=5
 condition_intiale = [15]*N  # liste capital initial
 A = fl.multi_marche(condition_intiale) #je recupere la matrice de fluctuation du capital des banques
 X_T=[A[i][-1] for i in range(len(A))] #je recupere la matrice du capital a la maturité
-W_T=X_T
 C=[10]*N  #matrice des seuils critiques
 
 E=[
@@ -23,10 +22,10 @@ E=[
 
 #je pars du principe que R est fixé a R=0.2 pour implementer l'algo
 
-def cascade(k):
+def cascade(k,X_T):
 	N=5
 	R=0.4
 	if k==0:
-		return [i for i in range(N) if W_T[i]<=C[i]]
+		return [i for i in range(N) if X_T[i]<=C[i]]
 	else:
-		return cascade(k-1)+[j for j in range(N) if j not in cascade(k-1) and W_T[j]-(1-R)*sum(E[j])<=C[j]]
+		return cascade(k-1,X_T)+[j for j in range(N) if j not in cascade(k-1,X_T) and X_T[j]-(1-R)*sum(E[j])<=C[j]]

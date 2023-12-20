@@ -7,7 +7,7 @@ import random as rd
 Lambda=20
 Mu=15
 Sigma=8
-T=5
+T=1
 Nmc=100000
 dt=T/Nmc
 N=5
@@ -48,11 +48,11 @@ def affichage_multi(condition_intiale):
 	plt.show()
 	return 1
 	
-print(affichage_multi([15,15,15,15,15]))
-'''j'ai ici le moyen d'avoir la matrice de fluctuation du prosto'''
+#print(affichage_multi([15,15,15,15,15]))
+'''j'ai ici le moyen d'avoir la matrice de fluctuation du capital de la banque'''
 
 	
-	
+
 	
 	
 	
