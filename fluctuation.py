@@ -13,17 +13,23 @@ dt=T/Nmc
 N=5
 X0=X1=X2=15
 X3=X4=X5=12
+Lambda_e=10
+Sigma_e=3
 
-def marche(X0):
+
+
+def marche(X0): #simulation proSto 
 	X=[X0]
 	t=[0]
+	#Z=[0]
 	for i in range(Nmc):
 		t.append(t[i]+dt)
+		#Z.append(np.exp(-Lambda_e*dt)*Z[i]+Sigma_e*(np.sqrt(dt)*np.random.normal()))
 		X.append(X[i]*(np.exp(-Lambda*dt))+Mu*(1-np.exp(-Lambda*dt))+Sigma*np.sqrt(dt)*np.random.normal())
 	return t,X
 #print(marche(15))
 
-def affichage(n):
+def affichage(n): #affiche n marche du proto
 	for _ in range(n):
 		t,X=marche(15)
 		plt.plot(t,X)
@@ -32,7 +38,7 @@ def affichage(n):
 #print(affichage(10))
 
 
-def multi_marche(condition_intiale):
+def multi_marche(condition_intiale): #retourne la matrice de l'ensemble des banques du systeme 
 	A=[]
 	for x in condition_intiale:
 		t,X=marche(x)
@@ -40,7 +46,7 @@ def multi_marche(condition_intiale):
 	return A
 #print(multi_marche([15,15,15,15,15]))
 
-def affichage_multi(condition_intiale):
+def affichage_multi(condition_intiale): #affichage de la matrice du capital du systeme
 	A=multi_marche(condition_intiale)
 	t=[i*T/Nmc for i in range(Nmc+1)]
 	for j in range(len(A)):

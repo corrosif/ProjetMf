@@ -14,7 +14,7 @@ N=5
 condition_intiale = [15]*N  
 C=[10]*N
 
-def Impact(X_T):
+def Impact(X_T): #calcul le cout financier de la chute du systeme
 	I=0
 	L=0
 	D=cd.cascade(N,X_T)
@@ -26,7 +26,7 @@ def Impact(X_T):
 	return I+L
 
 
-def affichage(n):
+def affichage(n): #affiche le cout de la chute
 	for i in range(n):
 		A = fl.multi_marche(condition_intiale) 
 		X_T=[A[i][-1] for i in range(len(A))]
@@ -34,7 +34,7 @@ def affichage(n):
 	return 1
 
 
-def IndexRisqueSys(Nmc):
+def IndexRisqueSys(Nmc): #calcul l'index du risque systemique
 	last_value=[]
 	for i in range(Nmc):
 		A = fl.multi_marche(condition_intiale) 
@@ -44,7 +44,7 @@ def IndexRisqueSys(Nmc):
 	return esperance
 #print(IndexRisqueSys(10))
 
-def I_S(n):
+def I_S(n): #permet d'obtenir n valeur de l'index du risque systemique
 	I_S=[]
 	for i in range(n):
 		I_S.append(IndexRisqueSys(33))
