@@ -7,7 +7,6 @@ import densiteRepartion as dr
 
 
 
-#X_T=cd.X_T
 E=cd.E
 R=0.3
 N=5
