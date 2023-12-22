@@ -19,10 +19,10 @@ def Var(X,a): # calcul la Var ie P(X(t)<=VAR)=alpha
 
 
 def CVar(X,a): #E[X|X<Var]
-	t,repartion=dr.fonction_de_repartition(X,1000)
+	t,densite=dr.fonction_densite(X,1000)
 	index,t[index]=Var(X,a)
-	Y=repartion[0:index]
+	Y=densite[0:index]
 	t=t[0:index]
 	moyenne=np.mean(Y)
 	return moyenne
-#print(CVar(N,0.2)) test ok
+#print(CVar(N,0.2)) #test ok
