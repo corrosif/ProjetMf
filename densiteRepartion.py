@@ -21,7 +21,6 @@ def fonction_densite(X,Nt):
 def fonction_de_repartition(X,Nt):
 	t,Y=fonction_densite(X,Nt)
 	somme=sum(i for i in Y)
-	somme_temps=sum(i for i in t)
 	repartition= np.cumsum(Y)/somme
 	dt=1/somme
 	T=[min(t)]
