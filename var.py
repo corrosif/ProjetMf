@@ -20,7 +20,11 @@ def Var(X,a): # calcul la Var ie P(X(t)<=VAR)=alpha
 
 def CVar(X,a): #E[X|X<Var]
 <<<<<<< HEAD
+<<<<<<< HEAD
 	t,densite=dr.fonction_densite(X,1000)
+=======
+	t,densite=dr.fonction_de_densite(X,1000)
+>>>>>>> 018e8a8ea06d82663d86eeeafe53fe21ecaf6f0a
 =======
 	t,densite=dr.fonction_de_densite(X,1000)
 >>>>>>> 018e8a8ea06d82663d86eeeafe53fe21ecaf6f0a
@@ -30,7 +34,11 @@ def CVar(X,a): #E[X|X<Var]
 	moyenne=np.mean(Y)
 	return moyenne
 <<<<<<< HEAD
+<<<<<<< HEAD
 #print(CVar(N,0.2)) #test ok
+=======
+print(CVar(N,0.2)) test ok
+>>>>>>> 018e8a8ea06d82663d86eeeafe53fe21ecaf6f0a
 =======
 print(CVar(N,0.2)) test ok
 >>>>>>> 018e8a8ea06d82663d86eeeafe53fe21ecaf6f0a
