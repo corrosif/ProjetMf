@@ -1,32 +1,38 @@
 import matplotlib.pyplot as plt
 import numpy as np
+import copy
+
 
 import fluctuation as fl
-from domino import Domino
+import domino as dm
 import densiteRepartion as dr
 
 
 
-E=cd.E
-R=0.3
-N=5
+
+R=0.05
+N=dm.N
 condition_intiale = [15]*N  
 C=[10]*N
-X_start=[14,9,8,13,15]#[15,9,8,18,12][12,9,11,13,12]
-D_sol_start=[i for i in range(N)]
+E=dm.E
+X_start=dm.X_start
+D_sol_start=dm.D_sol_start
 D_T_start=[]
 
 
-def Impact(X_T): #calcul le cout financier de la chute du systeme
-	I=0
-	L=0
-	D=dm.Domino(X_T:list,D_sol:list,D_T:list)(N,X_T)[2]
-	for j in D:
-		I+=X_T[j]
-		for p in range(N):
-			if p not in D:
-				L+=(1-R)*E[p][j]
+
+def Impact()->int: #calcul le cout financier de la chute du systeme
+	I,L=0,0
+	X_j=copy.deepcopy(X_start)
+	X_1,D_sol_1,D_T_1,q=dm.Chute_Domino(X_start,D_sol_start,D_T_start)
+	for j in D_T_1:
+		I+=X_j[j]
+		for p in D_sol_1:
+			L+=(1-R)*E[p][j]
 	return I+L
+print(Impact())
+	
+'''
 def affichage(n): #affiche le cout de la chute
 	for i in range(n):
 		A = fl.multi_marche(condition_intiale) 
@@ -51,6 +57,6 @@ B=[20.163646959883557, 10.267890611516941, 7.785582836953691, 18.167942914134443
 print(I_S(50))
 
 
-
+'''
 
 
