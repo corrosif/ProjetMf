@@ -11,7 +11,7 @@ X_T=[A[i][-1] for i in range(len(A))] #je recupere la matrice du capital a la ma
 C=[10]*N  #matrice des seuils critiques
 
 E=[
-	[0,3,0,0,1],
+	[0,3,0,0,6],
 	[3,0,0,0,0],
 	[3,3,0,0,0],
 	[2,2,2,0,2],
@@ -24,7 +24,7 @@ E=[
 
 def cascade(k,X_T): #cascade permet de retourner la liste des banques ayant fait faillite a l'intant q,T
 	N=5
-	R=0.4
+	R=0.95
 	if k==0:
 		return [i for i in range(N) if X_T[i]<=C[i]]
 	else:
@@ -39,4 +39,5 @@ def liste_cascade(n): #permet d'obtenir une liste de liste des banques faisant f
 		liste_cascade.append(cascade(N,X_T)) #N car je veux l'etat final
 	return liste_cascade
 
-	
+
+print(cascade(2,[14,9,8,13,15]))
