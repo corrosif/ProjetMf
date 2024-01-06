@@ -2,14 +2,13 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 import fluctuation as fl
-import cascades as cd
+from domino as dm
 import densiteRepartion as dr
 
 
 def Q1(): #dois retourner la proba que la banque 1,2...5 fasse faillite
 	proba=[0,0,0,0,0]
-	A=cd.liste_cascade(30)
-	print(A)
+	#A=
 	for cascade in A:
 			proba[len(cascade)]+=1/len(A) #on va calculer la taille de la faillite
 	return proba

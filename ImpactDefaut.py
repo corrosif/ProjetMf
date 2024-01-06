@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 import fluctuation as fl
-import cascades as cd
+from domino import Domino
 import densiteRepartion as dr
 
 
@@ -12,11 +12,15 @@ R=0.3
 N=5
 condition_intiale = [15]*N  
 C=[10]*N
+X_start=[14,9,8,13,15]#[15,9,8,18,12][12,9,11,13,12]
+D_sol_start=[i for i in range(N)]
+D_T_start=[]
+
 
 def Impact(X_T): #calcul le cout financier de la chute du systeme
 	I=0
 	L=0
-	D=cd.cascade(N,X_T)
+	D=dm.Domino(X_T:list,D_sol:list,D_T:list)(N,X_T)[2]
 	for j in D:
 		I+=X_T[j]
 		for p in range(N):
