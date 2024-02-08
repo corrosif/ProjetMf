@@ -20,10 +20,9 @@ Sigma_e=3
 
 def marche(X0): #simulation proSto 
 	X=[X0]
-	t=[0]
+	t=np.linspace(0,T,Nmc)
 	#Z=[0]
 	for i in range(Nmc):
-		t.append(t[i]+dt)
 		#Z.append(np.exp(-Lambda_e*dt)*Z[i]+Sigma_e*(np.sqrt(dt)*np.random.normal()))
 		X.append(X[i]*(np.exp(-Lambda*dt))+Mu*(1-np.exp(-Lambda*dt))+Sigma*np.sqrt(dt)*np.random.normal())
 	return t,X
