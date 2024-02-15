@@ -21,10 +21,9 @@ Sigma_e=3
 def marche(X0): #simulation proSto 
 	X=[X0]
 	t=np.linspace(0,T,Nmc)
-	#Z=[0]
-	for i in range(Nmc):
+	for i in range(1,Nmc):
 		#Z.append(np.exp(-Lambda_e*dt)*Z[i]+Sigma_e*(np.sqrt(dt)*np.random.normal()))
-		X.append(X[i]*(np.exp(-Lambda*dt))+Mu*(1-np.exp(-Lambda*dt))+Sigma*np.sqrt(dt)*np.random.normal())
+		X.append(X[i-1]*(np.exp(-Lambda*dt))+Mu*(1-np.exp(-Lambda*dt))+Sigma*np.sqrt(dt)*np.random.normal())
 	return t,X
 #print(marche(15))
 
@@ -34,7 +33,7 @@ def affichage(n): #affiche n marche du proto
 		plt.plot(t,X)
 	plt.show()
 	return 1
-#print(affichage(10))
+#print(affichage(1))
 
 
 def multi_marche(condition_intiale): #retourne la matrice de l'ensemble des banques du systeme 
