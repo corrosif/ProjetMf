@@ -1,4 +1,18 @@
 import numpy as np
+import matplotlib.pyplot as plt
+
+
+
+Lambda=20
+Mu=15
+Sigma=8
+T=1
+Nmc=100000
+dt=T/Nmc
+X0=X1=X2=15
+X3=X4=X5=12
+Lambda_e=10
+Sigma_e=3
 
 
 
@@ -25,16 +39,37 @@ def Cholesky(A,Nmc):
 
 #print(Cholesky(cov(0.2,2),2))
 
-def correlation(p,Nmc):
-	T=1
-	bt=np.sqrt(T)*np.random.normal(size=(Nmc,))
-	M=Cholesky(cov(p,Nmc),Nmc)
-	w=[]
-	s=0
-	for i in range(Nmc):
-		for j in range(i):
-			s+=M[i][j]
-		w.append(s*bt[i])
-	return w
+
+
+def marche_correlee(p,N):
+	matrice_cov=cov(p,N)
+	M=Cholesky(matrice_cov,N)
+	t=np.linspace(0,T,Nmc)
+	y=[]
+	dt=T/Nmc
+	for k in range(N):
+		X=[X0] #initialisation du marche alea
+		for i in range(1,Nmc):
+			bt=np.sqrt(dt)*np.random.normal(size=(N,)) #on initialise un vecteur de mvt bro
+			s=M[k] @ bt
+			X.append(X[i-1]*(np.exp(-Lambda*dt))+Mu*(1-np.exp(-Lambda*dt))+Sigma*s) #on itere en ajoutant la somme du mvt bro
+		y.append(X) #on recupere la marche
+		X=[] #on vide la liste pour repartir sur une liste vide
+
+	plt.figure(figsize=(10, 6))
+	for k in range(N):
+		plt.plot(t,y[k])
+	plt.show()
+	return 1
 	
-print(correlation(0.3,2))
+print(marche_correlee(0,2))
+			
+			
+			
+			
+			
+			
+			
+			
+	
+	
