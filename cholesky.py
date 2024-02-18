@@ -23,4 +23,18 @@ def Cholesky(A,Nmc):
 				L[i][j]=(1/L[j][j])*(A[i][j]-sum)
 	return L
 
-print(Cholesky(cov(0.2,6),6))
+#print(Cholesky(cov(0.2,2),2))
+
+def correlation(p,Nmc):
+	T=1
+	bt=np.sqrt(T)*np.random.normal(size=(Nmc,))
+	M=Cholesky(cov(p,Nmc),Nmc)
+	w=[]
+	s=0
+	for i in range(Nmc):
+		for j in range(i):
+			s+=M[i][j]
+		w.append(s*bt[i])
+	return w
+	
+print(correlation(0.3,2))
