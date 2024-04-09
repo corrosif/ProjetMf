@@ -14,7 +14,7 @@ def marche(X0): #simulation proSto
 	Nmc=1000
 	dt=T/Nmc
 	t=np.linspace(0,T,Nmc)
-	for _ in range(Nmc):
+	for _ in range(Nmc-1):
 		#Z.append(np.exp(-Lambda_e*dt)*Z[i]+Sigma_e*(np.sqrt(dt)*np.random.normal()))
 		X.append(X[-1]*(np.exp(-Lambda*dt))+Mu*(1-np.exp(-Lambda*dt))+Sigma*np.sqrt(dt)*np.random.normal())
 	return t,X
@@ -22,13 +22,11 @@ def marche(X0): #simulation proSto
 
 def affichage(n): #affiche n marche du proto
 	for _ in range(n):
-		t,X=marche(15)
+		t,X=marche(2)
 		plt.plot(t,X)
 	plt.show()
 	return 1
-#print(affichage(1))
-
-
+#print(affichage(1000))
 def multi_marche(condition_initiale): #retourne la matrice de l'ensemble des banques du systeme 
 	A=[]
 	for x in condition_initiale:
