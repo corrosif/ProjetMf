@@ -15,6 +15,9 @@ T=fl.T
 Nmc=1000
 t=np.linspace(0,T,Nmc)
 dt=T/Nmc
+Lambda=20
+Mu=15
+Sigma=8
 def suppresseur(X,seuil):
 	elements_a_supprimer = []  # Liste temporaire pour stocker les éléments à supprimer
 	for x in range(len(X)):
@@ -28,6 +31,7 @@ def suppresseur(X,seuil):
 	return X
 
 #print(suppresseur(X_start,10))
+'''
 def Impact_dynamique(X_start):
 	l=N;L=1000
 	X_T=X_start
@@ -57,11 +61,62 @@ def I_S(n,X_init): #permet d'obtenir n valeur d'impact
 	for i in range(n):
 		I_S.append(Impact_dynamique(X_init))
 	return I_S
-
-
-
-#print(I_S(500,X_start))
-
+#print(I_S(500,X_start))'''
+def marche(X0): 
+    # Prepare the output list 
+    X = [] 
+    Nmc=1000 
+    # Single time step for the entire simulation 
+    dt = T / Nmc 
+    
+     
+    # Perform the simulation for each initial value in the input vector 
+    for x0 in X0: 
+        if x0==None: 
+            X.append(None) 
+        if x0 is not None: 
+            newX = x0*(np.exp(-Lambda*dt)) + Mu*(1-np.exp(-Lambda*dt)) + Sigma*np.sqrt(dt)*np.random.normal() 
+            X.append(newX) 
+    return X 
+#print(marche( [9, 15, 12, 15, 15])) 
+def impact_2(): 
+    Nmc=1000 
+    # Single time step for the entire simulation 
+    dt = T / Nmc 
+     
+    V = [9, 15, 10.5, 15, 15] 
+    for i in range(Nmc): 
+        V = marche(V) 
+        #print(V) 
+        # Check if any value in V is less than 10 
+        for i in range(len(V)): 
+            if V[i]!=None: 
+                if V[i]>10: 
+                    V[i]=V[i]*(np.exp(-Lambda*dt)) + Mu*(1-np.exp(-Lambda*dt)) + Sigma*np.sqrt(dt)*np.random.normal() 
+                if V[i]<10: 
+                    V[i]=None 
+        ''' 
+        if any(v < 10 for v in V): 
+            V = X_T_None(V,[0,1,2,3,4],[])''' 
+    return V 
+#impact_2() 
+def MarcheUnitaire(X_T_0): 
+    X_T=marche(X_T_0) 
+    X_T_None1=X_T   
+    for i in range(len(X_T)): 
+        if X_T[i]!=None and X_T[i]<=10: 
+            X_T_None1=dm.X_T_None(X_T,[0,1,2,3,4],[]) 
+            break 
+    return X_T_None1 
+#print(MarcheUnitaire([9, 15, 10.5, 15, 15])) 
+ 
+def MarcheFinale(Nmc,X_demarrage): 
+    Y= [] 
+    Y=MarcheUnitaire(X_demarrage) 
+    for i in range(Nmc): 
+        Y=MarcheUnitaire(Y) 
+    return Y 
+print(MarcheFinale(1000,[9, 15, 10.5, 15, 15]))
 
 
 
