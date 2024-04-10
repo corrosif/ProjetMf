@@ -5,7 +5,6 @@ import fluctuation_Dy as fl
 import domino_Dy as dm
 import densiteRepartion as dr
 import ImpactDefaut_Dy as Id
-
 N=dm.N
 X_start=dm.X_start
 B=fl.multi_marche(X_start)		#on recupere la matrice des fluctuations du capital input X_0->X_T
@@ -16,20 +15,21 @@ T=fl.T
 Nmc=1000
 t=np.linspace(0,T,Nmc)
 dt=T/Nmc
-
 def suppresseur(X,seuil):
 	elements_a_supprimer = []  # Liste temporaire pour stocker les éléments à supprimer
-	for x in X:
-		if x < seuil:
+	for x in range(len(X)):
+		if X[x] == None or X[x] < seuil:
 			elements_a_supprimer.append(x)
 
-    # Supprimer les éléments de la liste X
-	for element in elements_a_supprimer:
-		X.remove(element)
+	for i in range(len(X)):
+		if i in elements_a_supprimer:
+			X[i] = None
+        
 	return X
+
 #print(suppresseur(X_start,10))
 def Impact_dynamique(X_start):
-	l=N;L=1
+	l=N;L=1000
 	X_T=X_start
 	D_T=[]
 	D_sol=[i for i  in range(l)]
@@ -37,26 +37,32 @@ def Impact_dynamique(X_start):
 	for i in range(L):
 		drapeau=True
 		Y=X_T.copy()
-		print(Y)
 		for n in range(len(X_T)):
-			#print('1',X_T)
 			if Y[n]<=10 or drapeau:
 				X_T,D_sol,D_T=dm.Domino(X_T,D_sol,D_T)
-				#print('2',X_T),print(D_sol),print(D_T)
-				print(D_sol)
 				drapeau=False
 				X_T=suppresseur(X_T,10)
-		#print('3',X_T)
 		X_T=fl.dX(X_T)
-		#print('4',X_T)
+		print(X_T)
 		if len(X_T)==0:
 			break
-	#print(X_T),print(D_sol),print(D_T)
-	print(X_T)
-	cout=Id.Impact(X_T,[0,4],[1,2,3])
+	cout=Id.Impact(X_T,D_sol,D_T)
 	return cout
-
+	
+X_start=[9]*5	
 print(Impact_dynamique(X_start))
+
+def I_S(n,X_init): #permet d'obtenir n valeur d'impact
+	I_S=[]
+	for i in range(n):
+		I_S.append(Impact_dynamique(X_init))
+	return I_S
+
+
+
+#print(I_S(500,X_start))
+
+
 
 
 

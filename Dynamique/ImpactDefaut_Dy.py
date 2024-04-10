@@ -17,14 +17,14 @@ Nmc2=10000
 def Impact(X_init,D_T,D_Sol)->int: #calcul le cout financier de la chute du systeme en input je prends X_start
 	I,L=0,0
 	X_j=copy.deepcopy(X_init)
-	X_1,D_sol_1,D_T_1=dm.Chute_Domino(X_init,D_T,D_Sol)
-	for j in D_T_1:
-		print(j)
-		I+=X_j[j]
-		for p in D_sol_1:
-			L+=(1-R)*E[p][j]
+	X_1,D_sol_1,D_T_1=dm.Chute_Domino(X_init,D_Sol,D_T)
+	if len(D_sol_1) !=0:
+		for j in D_T_1:
+			I+=X_j[j]
+			for p in D_sol_1:
+				L+=(1-R)*E[p][j]
 	return I+L
-print(Impact([14,14],[0,4],[1,2,3]))
+#print(Impact(X_start,[0,4],[1,2,3]))
 def IndexRisqueSys(X_init): #calcul l'index du risque systemique
 	last_value=[]
 	for i in range(Nmc2):

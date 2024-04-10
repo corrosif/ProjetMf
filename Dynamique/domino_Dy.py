@@ -35,7 +35,7 @@ def Domino(X_T:list,D_sol:list,D_T:list)->list:
 	D_faillite=copy.deepcopy(D_T)
 	A=set(D_faillite)
 	for i in D:
-		if X_T[i]<=C[i]:
+		if X_T[i]<=C[i]:#X_T[i]!= None or 
 			D_sol.remove(i)	#méthode pour calculer la liste des banques solvables
 			D_T.append(i) #méthode pour calculer la liste des banques en faillites
 	B=set(D_T)
@@ -46,7 +46,7 @@ def Domino(X_T:list,D_sol:list,D_T:list)->list:
 			somme+=E[i][j]	#on calcul a chaque fois l'impact de la faillite a chaque banque en defaut
 		X_T[i]-=(1-R)*somme  #on fait perdre le capital aux banques restantes 
 	return X_T,D_sol,D_T
-print(Domino([14,14],[0,4],[1,2,3]))
+#print(Domino([9,15,15,15,15],[0,1,2,3,4],[]))
 def Chute_Domino(X_T:list,D_sol:list,D_T:list)->list: #a partir du jeux de base j'ai besoin de connaitre le nombre d'etape avant la faillite, stabilite du systeme
 	test=False
 	q=-1
@@ -58,6 +58,38 @@ def Chute_Domino(X_T:list,D_sol:list,D_T:list)->list: #a partir du jeux de base 
 		if len(D_sol_1)==0 or D_sol_1==X:
 			test=True
 	return X_1,D_sol_1,D_T_1
-#print(Chute_Domino(X_start,D_sol_start,D_T_start))
+	
+#print(Chute_Domino([9,15,15,15,15],[0,1,2,3,4],[]))
+def suppresseur(X,seuil):
+	elements_a_supprimer=[]  # Liste temporaire pour stocker les éléments à supprimer
+	for x in range(len(X)):
+		if X[x] == None or X[x] < seuil:
+			elements_a_supprimer.append(x)
+	for i in range(len(X)):
+		if i in elements_a_supprimer:
+			X[i] = None
+	return X
+
+#print(suppresseur(X_start,10))
+
+def X_T_None(X_start,D_sol_1,D_T_1):	#->X_T_None
+	X_2,D_sol_2,D_T_2=Chute_Domino(X_start,D_sol_1,D_T_1)
+	X_T_None=suppresseur(X_2,10)
+	return X_T_None
+X_start=[9,15,15,15,15]
+print(X_T_None(X_start,[0,1,2,3,4],[]))
+	
+
+
+
+
+
+
+
+
+
+
+
+
 	
 

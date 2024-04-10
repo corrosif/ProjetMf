@@ -52,7 +52,8 @@ def dX(Vecteur):
 	dt=T/Nmc
 	t=np.linspace(0,T,Nmc)
 	for _ in range(len(Vecteur)):
-		X.append(Vecteur[-1]*(np.exp(-Lambda*dt))+Mu*(1-np.exp(-Lambda*dt))+Sigma*np.sqrt(dt)*np.random.normal())
+		if Vecteur[-1] != None:
+			X.append(Vecteur[-1]*(np.exp(-Lambda*dt))+Mu*(1-np.exp(-Lambda*dt))+Sigma*np.sqrt(dt)*np.random.normal())
 	return X
 
 	
