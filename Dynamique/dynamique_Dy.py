@@ -116,7 +116,19 @@ def MarcheFinale(Nmc,X_demarrage):
     for i in range(Nmc): 
         Y=MarcheUnitaire(Y) 
     return Y 
-print(MarcheFinale(1000,[9, 15, 10.5, 15, 15]))
+#print(MarcheFinale(1000,[9, 15, 10.5, 15, 15]))
+
+def Impact_final(X_depart):
+	Y=MarcheFinale(1000,X_depart)
+	D_sol_depart=[i for i in range(N)]
+	D_T_depart=[]
+	cout=Id.Impact(X_depart,Y,D_sol_depart,D_T_depart)
+	return cout
+print(Impact_final([9, 15, 10, 15, 15]))
+
+
+
+#print(Id.Impact([9, 15, 10.5, 15, 15],MarcheFinale(1000,[9, 15, 10.5, 15, 15]),[0,1,2,3,4],[]))
 
 
 

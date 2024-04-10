@@ -45,7 +45,7 @@ def Domino(X_T:list,D_sol:list,D_T:list)->list:
 			somme+=E[i][j]	#on calcul a chaque fois l'impact de la faillite a chaque banque en defaut
 		X_T[i]-=(1-R)*somme  #on fait perdre le capital aux banques restantes 
 	return [X_T,D_sol,D_T]
-	
+
 def Chute_Domino(X_T:list,D_sol:list,D_T:list)->list: #a partir du jeux de base j'ai besoin de connaitre le nombre d'etape avant la faillite, stabilite du systeme
 	test=False
 	q=-1
@@ -58,5 +58,5 @@ def Chute_Domino(X_T:list,D_sol:list,D_T:list)->list: #a partir du jeux de base 
 			test=True
 	return X_1,D_sol_1,D_T_1,q
 #print(Chute_Domino(X_start,D_sol_start,D_T_start))
-	
+print(Domino([14,14],[0,4],[1,2,3]))
 

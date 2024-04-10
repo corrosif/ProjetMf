@@ -13,18 +13,17 @@ X_start=dm.X_start
 D_sol_start=[i for i in range(N)]
 D_T_start=[]
 Nmc2=10000
-
-def Impact(X_init,D_T,D_Sol)->int: #calcul le cout financier de la chute du systeme en input je prends X_start
+def Impact(X_0,X_T,D_T,D_Sol)->int: #calcul le cout financier de la chute du systeme en input je prends X_start
 	I,L=0,0
-	X_j=copy.deepcopy(X_init)
-	X_1,D_sol_1,D_T_1=dm.Chute_Domino(X_init,D_Sol,D_T)
-	if len(D_sol_1) !=0:
-		for j in D_T_1:
-			I+=X_j[j]
+	X_j=copy.deepcopy(X_0)
+	X_1,D_sol_1,D_T_1=dm.Chute_Domino(X_T,D_Sol,D_T)
+	for j in D_T_1:
+		if X_1[j]==None:
+			I+=X_0[j]
 			for p in D_sol_1:
 				L+=(1-R)*E[p][j]
 	return I+L
-#print(Impact(X_start,[0,4],[1,2,3]))
+#print(Impact([9, 15, 10.5, 15, 15],[None, 14.889383555308807, None, 15.806835564374087, 15.724284738202947],[0,1,2,3,4],[]))
 def IndexRisqueSys(X_init): #calcul l'index du risque systemique
 	last_value=[]
 	for i in range(Nmc2):
