@@ -119,12 +119,20 @@ def MarcheFinale(Nmc,X_demarrage):
 #print(MarcheFinale(1000,[9, 15, 10.5, 15, 15]))
 
 def Impact_final(X_depart):
-	Y=MarcheFinale(1000,X_depart)
+	Y=MarcheFinale(10000,X_depart)
 	D_sol_depart=[i for i in range(N)]
 	D_T_depart=[]
 	cout=Id.Impact(X_depart,Y,D_sol_depart,D_T_depart)
 	return cout
-print(Impact_final([9, 15, 10, 15, 15]))
+#print(Impact_final([15, 15, 15, 15, 15]))
+
+def loup(X_depart,n):
+	Y=[]
+	for i in range(n):
+		Y.append(Impact_final(X_depart))
+	return Y
+print(loup([15, 15, 15, 15, 15],20))
+
 
 
 
